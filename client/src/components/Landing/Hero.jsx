@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export const Hero = () => {
   return (
-    <section className="bg-gray-50 pt-12">
+    <section className="bg-gray-50 pt-12 p-3">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
