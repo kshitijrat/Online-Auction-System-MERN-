@@ -1,5 +1,5 @@
 import AuctionCard from "../components/AuctionCard.jsx";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { dashboardStats } from "../api/auction.js";
 import LoadingScreen from "../components/LoadingScreen.jsx";
