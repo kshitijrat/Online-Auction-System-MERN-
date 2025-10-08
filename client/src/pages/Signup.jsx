@@ -68,7 +68,7 @@ const Signup = () => {
                     })
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-gray-400"
-                  placeholder="Your Name"
+                  placeholder="John Doe"
                   required
                 />
               </div>
@@ -116,10 +116,10 @@ const Signup = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-1 focus:ring-gray-400"
                   placeholder="••••••••"
                   required
-                  minLength={4}
+                  minLength={8}
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  Password must be at least 4 characters long
+                  Password must be at least 8 characters long
                 </p>
               </div>
 

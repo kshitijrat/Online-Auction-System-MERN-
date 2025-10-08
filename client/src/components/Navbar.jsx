@@ -36,7 +36,7 @@ export const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Prevent body scroll when drawer is open
+  //this will prevent body scroll when drawer is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -63,21 +63,19 @@ export const Navbar = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
-              {(user?.user?.role ? getNavLinks(user.user.role) : navMenu).map(
-                (item) => (
-                  <NavLink
-                    to={item.link}
-                    key={item.link}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-indigo-600 hover:text-indigo-800 font-medium"
-                        : "text-gray-600 hover:text-gray-800 font-medium"
-                    }
-                  >
-                    {item.name}
-                  </NavLink>
-                )
-              )}
+              {(user ? getNavLinks(user.user.role) : navMenu).map((item) => (
+                <NavLink
+                  to={item.link}
+                  key={item.link}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-indigo-600 hover:text-indigo-800 font-medium"
+                      : "text-gray-600 hover:text-gray-800 font-medium"
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              ))}
             </nav>
 
             {/* Mobile Menu Button */}
@@ -93,7 +91,7 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Drawer */}
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${
           isMenuOpen ? "opacity-70" : "opacity-0 pointer-events-none"
@@ -101,7 +99,6 @@ export const Navbar = () => {
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Mobile Menu Drawer */}
       <div
         className={`fixed top-0 right-0 h-full w-72 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -149,24 +146,22 @@ export const Navbar = () => {
 
         <nav className="p-4">
           <ul className="space-y-1">
-            {(user?.user?.role ? getNavLinks(user.user.role) : navMenu).map(
-              (item) => (
-                <li key={item.link}>
-                  <NavLink
-                    to={item.link}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "flex items-center py-2 text-indigo-600 hover:text-indigo-800 font-medium"
-                        : "flex items-center py-2 text-gray-600 hover:text-gray-800 font-medium"
-                    }
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.icon}
-                    {item.name}
-                  </NavLink>
-                </li>
-              )
-            )}
+            {(user ? getNavLinks(user.user.role) : navMenu).map((item) => (
+              <li key={item.link}>
+                <NavLink
+                  to={item.link}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center py-2 text-indigo-600  hover:text-indigo-800 font-medium"
+                      : "flex items-center py-2 text-gray-600  hover:text-gray-800 font-medium"
+                  }
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.icon}
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
           </ul>
 
           {user ? (
@@ -178,8 +173,8 @@ export const Navbar = () => {
                       to={item.link}
                       className={({ isActive }) =>
                         isActive
-                          ? "flex items-center py-2 text-indigo-600 hover:text-indigo-800 font-medium"
-                          : "flex items-center py-2 text-gray-600 hover:text-gray-800 font-medium"
+                          ? "flex items-center py-2 text-indigo-600  hover:text-indigo-800 font-medium"
+                          : "flex items-center py-2 text-gray-600  hover:text-gray-800 font-medium"
                       }
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -190,7 +185,7 @@ export const Navbar = () => {
                 ))}
                 <li>
                   <button
-                    className="flex items-center w-full py-2 text-gray-600 hover:text-gray-800 font-medium text-left cursor-pointer"
+                    className="flex items-center w-full py-2 text-gray-600  hover:text-gray-800 font-medium text-left cursor-pointer"
                     onClick={() => {
                       setIsMenuOpen(false);
                       handleLogout();
@@ -206,7 +201,7 @@ export const Navbar = () => {
             <div className="mt-6 pt-6 border-t border-gray-200 space-y-4">
               <Link
                 to="/login"
-                className="block w-full py-2 px-4 text-center text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                className="block w-full py-2 px-4 text-center text-gray-700  border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Log in
@@ -225,19 +220,18 @@ export const Navbar = () => {
     </>
   );
 };
-
 export const LoginSignup = () => {
   return (
     <>
       <Link
         to="/login"
-        className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors hidden md:block"
+        className="px-4 py-2 text-gray-700  border border-gray-300 rounded-md hover:bg-gray-100 transition-colors hidden md:block"
       >
         Log in
       </Link>
       <Link
         to="/signup"
-        className="px-4 py-2 bg-indigo-800 text-white rounded-md hover:bg-indigo-700 transition-colors hidden md:block"
+        className="px-4 py-2 bg-indigo-800 text-white  rounded-md hover:bg-indigo-700 transition-colors hidden md:block"
       >
         Sign up
       </Link>
@@ -245,34 +239,94 @@ export const LoginSignup = () => {
   );
 };
 
-// Menu Data
 const navMenu = [
-  { name: "Home", link: "/", icon: <MdOutlineHome className="mr-3 h-5 w-5" /> },
-  { name: "About", link: "/about", icon: <MdOutlineAccountCircle className="mr-3 h-5 w-5" /> },
-  { name: "Contact", link: "/contact", icon: <MdMailOutline className="mr-3 h-5 w-5" /> },
-  { name: "Legal", link: "/legal", icon: <IoDocumentTextOutline className="mr-3 h-5 w-5" /> },
+  {
+    name: "Home",
+    link: "/",
+    icon: <MdOutlineHome className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "About",
+    link: "/about",
+    icon: <MdOutlineAccountCircle className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Contact",
+    link: "/contact",
+    icon: <MdMailOutline className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Legal",
+    link: "/legal",
+    icon: <IoDocumentTextOutline className="mr-3 h-5 w-5" />,
+  },
 ];
 
 const protectedNavLink = [
-  { name: "Dashboard", link: "/", icon: <MdOutlineDashboard className="mr-3 h-5 w-5" /> },
-  { name: "Create Auction", link: "/create", icon: <MdOutlineCreate className="mr-3 h-5 w-5" /> },
-  { name: "View Auction", link: "/auction", icon: <RiAuctionLine className="mr-3 h-5 w-5" /> },
-  { name: "My Auction", link: "/myauction", icon: <MdAttachMoney className="mr-3 h-5 w-5" /> },
-  { name: "Contact", link: "/contact", icon: <MdMailOutline className="mr-3 h-5 w-5" /> },
-  { name: "Profile", link: "/profile", icon: <MdOutlineAccountCircle className="mr-3 h-5 w-5" /> },
-  { name: "Privacy", link: "/privacy", icon: <MdOutlinePrivacyTip className="mr-3 h-5 w-5" /> },
+  {
+    name: "Dashboard",
+    link: "/",
+    icon: <MdOutlineDashboard className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Create Auction",
+    link: "/create",
+    icon: <MdOutlineCreate className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "View Auction",
+    link: "/auction",
+    icon: <RiAuctionLine className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "My Auction",
+    link: "/myauction",
+    icon: <MdAttachMoney className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Contact",
+    link: "/contact",
+    icon: <MdMailOutline className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Profile",
+    link: "/profile",
+    icon: <MdOutlineAccountCircle className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Privacy",
+    link: "/privacy",
+    icon: <MdOutlinePrivacyTip className="mr-3 h-5 w-5" />,
+  },
 ];
 
 const adminNavLink = [
-  { name: "Admin Panel", link: "/admin", icon: <MdAdminPanelSettings className="mr-3 h-5 w-5" /> },
-  { name: "Dashboard", link: "/", icon: <MdOutlineDashboard className="mr-3 h-5 w-5" /> },
-  { name: "Create Auction", link: "/create", icon: <MdOutlineCreate className="mr-3 h-5 w-5" /> },
-  { name: "View Auction", link: "/auction", icon: <RiAuctionLine className="mr-3 h-5 w-5" /> },
+  {
+    name: "Admin Panel",
+    link: "/admin",
+    icon: <MdAdminPanelSettings className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Dashboard",
+    link: "/",
+    icon: <MdOutlineDashboard className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "Create Auction",
+    link: "/create",
+    icon: <MdOutlineCreate className="mr-3 h-5 w-5" />,
+  },
+  {
+    name: "View Auction",
+    link: "/auction",
+    icon: <RiAuctionLine className="mr-3 h-5 w-5" />,
+  },
 ];
 
-// Safe function to get nav links based on user role
+// Helper function to get navigation links based on user role
 const getNavLinks = (userRole) => {
-  if (userRole === "admin") return adminNavLink;
-  if (userRole) return protectedNavLink.slice(0, 4);
-  return navMenu; // fallback
+  if (userRole === 'admin') {
+    return adminNavLink;
+  }
+  return protectedNavLink.slice(0, 4);
 };

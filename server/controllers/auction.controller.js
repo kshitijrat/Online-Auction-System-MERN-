@@ -1,4 +1,3 @@
-// auction.controller.js
 import uploadImage from '../services/cloudinaryService.js';
 import Product from '../models/product.js';
 import mongoose from "mongoose"
@@ -7,9 +6,6 @@ import { connectDB } from '../connection.js'
 
 export const createAuction = async (req, res) => {
     try {
-        console.log("req.body:", req.body);
-        console.log("req.file:", req.file);
-
         await connectDB();
         const { itemName, startingPrice, itemDescription, itemCategory, itemStartDate, itemEndDate } = req.body;
         let imageUrl = '';
